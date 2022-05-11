@@ -1,0 +1,133 @@
+# 들어가기전에
+
+# 시작
+## map
+### 1.일단 코딩
+```js
+const productList = [
+  { name: '반팔티', price: 15000 },
+  { name: '긴팔티', price: 45000 },
+  { name: '반반팔티', price: 35000 },
+  { name: '긴긴팔티', price: 56000 },
+]
+
+const nameList = []
+const priceList = []
+
+for (const product of productList) {
+  names.push(product.name)
+  priceList.push(product.price)
+}
+```
+### 2. 개선
+#### 함수형 프로그래밍은 외부의 상태를 변경시키지 않고, 함수가 인자와 리턴값으로 소통하는 것을 권장
+```js
+// map 
+const nameList = productList.map((product) => product.name)
+
+console.log(nameList) // [ '반팔티', '긴팔티', '반반팔티', '긴긴팔티' ]
+```
+```js
+// custom map
+const customMap = (f, iter) => {
+  let res = []
+  for (const element of iter) {
+    res.push(f(element))
+  }
+  return res
+}
+
+const nameList = customMap((e) => e.name, productList)
+
+console.log(nameList) // [ '반팔티', '긴팔티', '반반팔티', '긴긴팔티' ]
+
+```
+#### 이터러블 프로토콜 + map의 다형성
+```js
+// error : Array가 아니기 때문에 __proto__에 없다
+document.querySelectorAll('*').map((el) => el.nodeName)
+
+// for of를 활용한 customMap, 다양한 곳에서 사용할 수 있다.
+// ['HTML', 'HEAD', 'META', 'META', 'META', 'TITLE', 'SCRIPT']
+customMap((el) => el.nodeName, document.querySelectorAll('*'))
+```
+
+## filter
+### 1. 일단 코딩
+```js
+let under20000 = []
+for (const product of productList) {
+  if (product.price < 20000) under20000.push(product)
+}
+
+// [ { name: '반팔티', price: 15000 } ]
+console.log(under20000)
+```
+### 2. 개선
+```js
+const customFilter = (iter, f) => {
+  let res = []
+  for (const el of iter) {
+    if (f(el)) res.push(el)
+  }
+  return res
+}
+
+const under20000 = customFilter(productList, (el) => el.price < 20000)
+console.log(under20000) // [ { name: '반팔티', price: 15000 } ]
+
+
+const test = customFilter([1, 2, 3, 4, 5], (el) => el < 3)
+console.log(test)  // [ 1, 2 ]
+```
+
+## reduce
+### 1. 일단 코딩
+```js
+const numList = [1, 2, 3, 4, 5]
+
+let total = 0
+for (const num of numList) total = total + num
+console.log(total)
+```
+### 2. 목표하는 형태
+```js
+const reduce = () => {}
+
+const add = (a, b) => a + b
+
+const result = reduce(add, 0, [1, 2, 3, 4, 5]) // result = 15가 되어야 한다. 
+
+const toBe = add(add(add(add(add(0, 1), 2), 3), 4), 5) // 15
+```
+#### `reduce(add, [1,2,3,4,5])` 형태도 가능하게 만들어주기
+
+```js
+const reduce = (f, acc, iter) => {
+  for (const a of iter) acc = f(acc, a)
+  return acc
+}
+
+const add = (a, b) => a + b
+
+const result = reduce(add, 0, [1, 2, 3, 4, 5])
+
+console.log(result)
+```
+```js
+const reduce = (f, acc, iter) => {
+  if (!iter) {
+    iter = acc[Symbol.iterator]()
+    acc = iter.next().value
+  }
+  for (const a of iter) {
+    acc = f(acc, a)
+  }
+  return acc
+}
+
+const add = (a, b) => a + b
+
+const result = reduce(add, [1, 2, 3, 4, 5])
+console.log(result) // 15
+```
