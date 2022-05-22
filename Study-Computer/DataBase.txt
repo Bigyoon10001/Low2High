@@ -12,3 +12,6 @@ GROUP BY
 
 HAVING
 GROUP BY와 함께 쓰이는 조건문
+ㅠ
+DDL DML 벨로그 정리
+
