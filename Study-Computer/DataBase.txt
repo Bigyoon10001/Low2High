@@ -12,6 +12,9 @@ GROUP BY
 
 HAVING
 GROUP BY와 함께 쓰이는 조건문
-ㅠ
-DDL DML 벨로그 정리
 
+DDL DML 벨로그 정리
+https://velog.io/@bigyoon/SQL
+
+Data Tyoe 벨로그 정리
+https://velog.io/@bigyoon/SQL-Data-Type
