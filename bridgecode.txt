@@ -9,3 +9,6 @@ feature/vistReservation  feature/coupon-init  conflict 오류 해결.. 시도..?
 
 22.05.23.
 폭풍 퍼블리싱
+
+22.05.24.
+알고택스 SEO 작업, 크롤링 공부
