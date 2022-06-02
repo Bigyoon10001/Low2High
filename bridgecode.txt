@@ -15,3 +15,6 @@ feature/vistReservation  feature/coupon-init  conflict 오류 해결.. 시도..?
 
 22.06.01.
 비용안내 페이지 분할 작업, 알고택스 SEO 작업
+
+22.06.02.
+비용안내 페이지 분할 작업
