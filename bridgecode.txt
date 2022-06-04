@@ -21,3 +21,6 @@ feature/vistReservation  feature/coupon-init  conflict 오류 해결.. 시도..?
 
 22.06.03.
 비용안내 페이지 분할 작업 완료
+
+22.06.04.
+가상자산 크롤링
